@@ -52,7 +52,7 @@ class CsrfMiddleware implements MiddlewareInterface
     }
 
     /**
-     * Generate the input field
+     * Generate the input field.
      *
      * @return string
      */
