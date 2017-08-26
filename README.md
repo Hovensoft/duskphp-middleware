@@ -1,5 +1,6 @@
 # DuskPHP - Middleware
 [![Build Status](https://travis-ci.org/Hovensoft/duskphp-middleware.svg?branch=master)](https://travis-ci.org/Hovensoft/duskphp-middleware)
+[![Coverage Status](https://coveralls.io/repos/github/Hovensoft/duskphp-middleware/badge.svg?branch=master)](https://coveralls.io/github/Hovensoft/duskphp-middleware?branch=master)
 
  A Collection of middleware
 
