@@ -6,7 +6,7 @@
  * Time: 14:18.
  */
 
-namespace DuskPHP\Middlewares\CSRF;
+namespace DuskPHP\Middleware\CSRF;
 
 class NoCsrfException extends \Exception
 {

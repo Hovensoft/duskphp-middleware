@@ -2,21 +2,31 @@
 [![Build Status](https://travis-ci.org/Hovensoft/duskphp-middleware.svg?branch=master)](https://travis-ci.org/Hovensoft/duskphp-middleware)
 [![Coverage Status](https://coveralls.io/repos/github/Hovensoft/duskphp-middleware/badge.svg?branch=master)](https://coveralls.io/github/Hovensoft/duskphp-middleware?branch=master)
 
- A Collection of middleware
+ Provide middleware:
+ - a CSRF authenticator which protect against CSRF attack with a token authentication 
 
  ## How to use
  
- ### CSRF Authentication
+ - ## CSRF Authenticator
+ __How to use it ?__
+ 
  This middleware check every POST, PUT and DELETE request for a CSRF token.
  
  ```php
  $middleware = new CsrfMiddleware($_SESSION, 200);
  $dispatcher->pipe($middleware);
- 
- //Generate input
- $middleware->input();
-
  ```
+ __Input__
+ 
+ The middleware check if the string `<:csrf_token_field:>` is in response and replace it with 
+ the authenticator's token.
+ 
+ ```html
+ <form action="" method="post">
+    ...
+    <:csrf_token_field:>
+</form>
+```
 
  
  ## LICENSE

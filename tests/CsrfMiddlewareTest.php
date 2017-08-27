@@ -1,10 +1,10 @@
 <?php
 
-namespace DuskPHP\Middlewares\Tests\CSRF;
+namespace DuskPHP\Middleware\Tests\CSRF;
 
-use DuskPHP\Middlewares\CSRF\CsrfMiddleware;
-use DuskPHP\Middlewares\CSRF\InvalidCerfException;
-use DuskPHP\Middlewares\CSRF\NoCsrfException;
+use DuskPHP\Middleware\CSRF\CsrfAuthenticatorMiddleware;
+use DuskPHP\Middleware\CSRF\InvalidCerfException;
+use DuskPHP\Middleware\CSRF\NoCsrfException;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -14,7 +14,7 @@ class CsrfMiddlewareTest extends TestCase
 {
     private function makeMiddleware(&$session = [])
     {
-        return new CsrfMiddleware($session);
+        return new CsrfAuthenticatorMiddleware($session);
     }
 
     private function makeRequest(string $method = 'GET', ?array $params = null): ServerRequestInterface
@@ -47,8 +47,8 @@ class CsrfMiddlewareTest extends TestCase
         $b = $this->getMockBuilder(\ArrayAccess::class)->getMock();
         $middlewarea = $this->makeMiddleware($a);
         $middlewareb = $this->makeMiddleware($b);
-        $this->assertInstanceOf(CsrfMiddleware::class, $middlewarea);
-        $this->assertInstanceOf(CsrfMiddleware::class, $middlewareb);
+        $this->assertInstanceOf(CsrfAuthenticatorMiddleware::class, $middlewarea);
+        $this->assertInstanceOf(CsrfAuthenticatorMiddleware::class, $middlewareb);
     }
 
     public function testRejectInvalideSession()

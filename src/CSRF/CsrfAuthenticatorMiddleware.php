@@ -1,6 +1,6 @@
 <?php
 
-namespace DuskPHP\Middlewares\CSRF;
+namespace DuskPHP\Middleware\CSRF;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
@@ -8,9 +8,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Class CsrfMiddleware.
+ * Class CsrfAuthenticatorMiddleware.
  */
-class CsrfMiddleware implements MiddlewareInterface
+class CsrfAuthenticatorMiddleware implements MiddlewareInterface
 {
     /**
      * @var array|\ArrayAccess
@@ -31,7 +31,7 @@ class CsrfMiddleware implements MiddlewareInterface
     private $limit;
 
     /**
-     * CsrfMiddleware constructor.
+     * CsrfAuthenticatorMiddleware constructor.
      *
      * @param array|\ArrayAccess $session
      * @param int                $limit
@@ -85,11 +85,12 @@ class CsrfMiddleware implements MiddlewareInterface
                 throw new InvalidCerfException();
             }
             $this->removeToken($params[$this->fromKey]);
-
-            return $delegate->process($request);
         }
+        $response = $delegate->process($request);
+        $body = $response->getBody()->getContents();
+        $body = str_replace('<:csrf_token_field:>', $this->input(), $body);
 
-        return $delegate->process($request);
+        return $response->withBody($body);
     }
 
     /**

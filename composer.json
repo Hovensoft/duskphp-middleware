@@ -11,8 +11,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "DuskPHP\\Middlewares\\": "src/",
-            "DuskPHP\\MiddleWares\\Tests\\": "tests"
+            "DuskPHP\\Middleware\\": "src/",
+            "DuskPHP\\MiddleWare\\Tests\\": "tests"
         }
     },
     "require": {
